@@ -10,11 +10,9 @@
         }, 1);
     };
     spinner();
-    
-    
+
     // Initiate the wowjs
     new WOW().init();
-
 
     // Fixed Navbar
     $(window).scroll(function () {
@@ -32,8 +30,7 @@
             }
         }
     });
-    
-    
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -47,14 +44,12 @@
         return false;
     });
 
-
     // Causes progress
     $('.causes-progress').waypoint(function () {
         $('.progress .progress-bar').each(function () {
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
         });
     }, {offset: '80%'});
-
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
@@ -78,6 +73,19 @@
         }
     });
 
-    
-})(jQuery);
+    // Auto close navbar when clicking outside (on mobile)
+    $(document).click(function (event) {
+        var clickTarget = $(event.target);
+        var navbar = $('.navbar-collapse');
+        var toggler = $('.navbar-toggler');
 
+        if (
+            navbar.hasClass('show') && 
+            !clickTarget.closest('.navbar-collapse').length &&
+            !clickTarget.closest('.navbar-toggler').length
+        ) {
+            toggler.trigger('click');
+        }
+    });
+
+})(jQuery);
